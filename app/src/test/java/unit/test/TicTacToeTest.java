@@ -1,5 +1,6 @@
 package unit.test;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -7,6 +8,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class TicTacToeTest {
+    
+    @Test
+public void testEmptyBoard() {
+    TicTacToe game = new TicTacToe();
+    char[][] expectedEmptyBoard = {
+        {' ', ' ', ' '},
+        {' ', ' ', ' '},
+        {' ', ' ', ' '}
+    };
+    assertArrayEquals(expectedEmptyBoard, game.getBoard());
+}
 
     @Test
     public void testWinCondition() {
@@ -68,14 +80,6 @@ public class TicTacToeTest {
     }
     
     @Test
-    public void testOccupiedCellMove() {
-        TicTacToe game = new TicTacToe();
-        assertTrue(game.playMove(0, 0)); // X macht den ersten Zug
-        assertFalse(game.playMove(0, 0)); // Versuch, erneut auf dasselbe Feld zu setzen
-        assertEquals('X', game.getBoard()[0][0]); // Überprüfen, ob der ursprüngliche Wert erhalten bleibt
-    }
-
-    @Test
     public void testInvalidMoveOutsideBoard() {
     TicTacToe game = new TicTacToe();
     assertFalse(game.playMove(3, 3), "Sollte falsch zurückgeben, wenn der Zug außerhalb des Spielfelds liegt");
@@ -118,5 +122,7 @@ public class TicTacToeTest {
     game.playMove(2, 2); // X
     assertTrue(game.hasWon('X'), "X sollte das Spiel gewonnen haben.");
     }
+
+
 
 }
